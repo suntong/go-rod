@@ -73,11 +73,21 @@ func main() {
 
 	// Parse result
 	var scraped ScrapedData
-	jsonStr := data.String()
-	json.Unmarshal([]byte(jsonStr), &scraped)
+	bytes, err := json.Marshal(data)
+	if err != nil {
+		log.Fatal(err)
+	}
+	json.Unmarshal(bytes, &scraped)
 
 	fmt.Printf("Title: %s\n", scraped.Title)
 	fmt.Printf("Found %d links and %d images\n", len(scraped.Links), len(scraped.Images))
+
+	// Output as JSON
+	jsonOutput, err := json.MarshalIndent(scraped, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(jsonOutput))
 
 	// Handle cookies
 	cookies := page.MustCookies()
