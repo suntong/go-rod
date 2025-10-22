@@ -45,9 +45,9 @@ func main() {
 	}
 
 	// Extract data after JS rendering
-	titles := page.MustElements("h2").MustTexts()
-	for _, title := range titles {
-		fmt.Println("Found title:", title)
+	elements := page.MustElements("h2")
+	for _, el := range elements {
+		fmt.Println(el.MustText())
 	}
 
 	// Execute custom JavaScript
