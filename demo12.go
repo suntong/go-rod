@@ -29,20 +29,22 @@ func main() {
 
 	// Wait for specific element to appear (useful for SPAs)
 	page.MustElement("body").MustWaitVisible()
+	fmt.Println("Element:body found.")
 
 	// Scroll to load lazy-loaded content
 	page.Mouse.MustScroll(0, 1000)
 	time.Sleep(2 * time.Second)
+	fmt.Println("page scrolled 1000")
 
 	// Click on elements
-	if el, err := page.Element("button.primary"); err == nil {
-		el.MustClick()
-	}
+//	if el, err := page.Element("button.primary"); err == nil {
+//		el.MustClick()
+//	}
 
 	// Fill forms
-	if el, err := page.Element("input[type='text']"); err == nil {
-		el.MustInput("Hello World")
-	}
+//	if el, err := page.Element("input[type='text']"); err == nil {
+//		el.MustInput("Hello World")
+//	}
 
 	// Extract data after JS rendering
 	elements := page.MustElements("h2")
